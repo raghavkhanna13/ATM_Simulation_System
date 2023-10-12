@@ -61,6 +61,9 @@ public class Login extends JFrame implements ActionListener {
         login.setBackground(Color.BLACK);
         login.setForeground(Color.WHITE);
         login.addActionListener(this);
+        //these two lines have been added to set the button display properly on mac too
+        login.setOpaque(true);
+        login.setBorderPainted(false);
         add(login);
 
         clear = new JButton("CLEAR");
@@ -68,6 +71,9 @@ public class Login extends JFrame implements ActionListener {
         clear.setBackground(Color.BLACK);
         clear.setForeground(Color.WHITE);
         clear.addActionListener(this);
+        //these two lines have been added to set the button display properly on mac too
+        clear.setOpaque(true);
+        clear.setBorderPainted(false);
         add(clear);
 
         signup = new JButton("SIGN UP");
@@ -75,6 +81,9 @@ public class Login extends JFrame implements ActionListener {
         signup.setBackground(Color.BLACK);
         signup.setForeground(Color.WHITE);
         signup.addActionListener(this);
+        //these two lines have been added to set the button display properly on mac too
+        signup.setOpaque(true);
+        signup.setBorderPainted(false);
         add(signup);
 
 
