@@ -216,8 +216,12 @@ public class SignupOne extends JFrame implements ActionListener {
             // here the values has been added to the mysql database table
             else {
                 Conn c = new Conn();
-                String query = "INSERT INTO Signup VALUES('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+state+"','"+pincode+"')";
+                String query = "INSERT INTO SignupOne VALUES('"+formno+"','"+name+"','"+fname+"','"+dob+"','"+gender+"','"+email+"','"+marital+"','"+address+"','"+city+"','"+state+"','"+pincode+"')";
                 c.s.executeUpdate(query);
+
+                // current form is closed and next form is opened here
+                setVisible(false);
+                new SignupTwo(formno).setVisible(true);
             }
         }
         catch (Exception exception){
