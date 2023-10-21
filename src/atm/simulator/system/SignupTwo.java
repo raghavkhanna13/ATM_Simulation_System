@@ -30,7 +30,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
         JLabel religion=new JLabel("Religion : " );
         religion.setFont(new Font("Raleway", Font.BOLD,20));
-        religion.setBounds(100,140,100,30);
+        religion.setBounds(100,140,120,30);
         add(religion);
 
         String[] religionArr = {"Sanatani", "Sikh", "Muslim", "Christian", "Others"};
