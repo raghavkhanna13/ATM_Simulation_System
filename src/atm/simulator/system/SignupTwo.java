@@ -202,6 +202,7 @@ public class SignupTwo extends JFrame implements ActionListener {
 
             setVisible(false);
             // new class object will be defined here
+            new SignupThree(formNo).setVisible(true);
 
         } catch (Exception exception) {
             System.out.println(exception);
