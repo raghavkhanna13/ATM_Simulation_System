@@ -25,7 +25,7 @@ create table signupthree (FormNo varchar(10), Account_Type varchar(30),Card_Numb
 select * from signupthree;
 truncate signupthree;   
 
-
+-- for deposit and withdrawal data
 create table bank(pin varchar(10),date varchar(50),type varchar(20),amount varchar(20));
 select * from bank;
 
