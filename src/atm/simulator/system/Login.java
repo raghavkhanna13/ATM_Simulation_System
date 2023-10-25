@@ -3,6 +3,7 @@ package atm.simulator.system;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 
 public class Login extends JFrame implements ActionListener {
     
@@ -103,7 +104,21 @@ public class Login extends JFrame implements ActionListener {
             pinTextField.setText("");
         }
         else if(e.getSource() == login) {
-            // to be done later 
+            Conn conn = new Conn();
+            String cardNumber = cardTextField.getText();
+            String pinNumber = pinTextField.getText();
+            String query = "Select * from login where card_number = '" +cardNumber + "' AND pin = '" + pinNumber + "'";
+            try {
+                ResultSet rs = conn.s.executeQuery(query);
+                if(rs.next()) {
+                    setVisible(false);
+                    new Transactions(pinNumber).setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Incorrect Card Number Or Pin");
+                }
+            } catch (Exception exception) {
+                System.out.println(exception);
+            }
         }
         else if(e.getSource() == signup){
             setVisible(false);
