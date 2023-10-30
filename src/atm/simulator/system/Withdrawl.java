@@ -10,9 +10,9 @@ public class Withdrawl extends JFrame implements ActionListener {
     JTextField amount;
     JButton withdraw,back;
 
-    String pinnumber;
-    Withdrawl(String pinnumber){
-
+    String pinnumber, cardNumber;
+    Withdrawl(String cardNumber, String pinnumber){
+        this.cardNumber = cardNumber;
         this.pinnumber=pinnumber;
 
         setLayout(null);
@@ -52,28 +52,28 @@ public class Withdrawl extends JFrame implements ActionListener {
 
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==withdraw){
-            String number=amount.getText();
+            String money=amount.getText();
             Date date=new Date();
-            if(number.equals("")){
+            if(money.equals("")){
                 JOptionPane.showMessageDialog(null,"Please enter the amount you want to Withdraw");
             } else{
                 try {
                     Conn conn = new Conn();
-                    String query = "INSERT INTO bank VALUES('" + pinnumber + "','" + date + "','Withdrawal','" + number + "')";
+                    String query = "INSERT INTO amountDetails VALUES('"+ cardNumber +"','" + pinnumber + "','" + date + "','Withdrawal','" + money + "')";
                     conn.s.executeUpdate(query);
-                    JOptionPane.showMessageDialog(null, "Rs " + number + " Withdrawn Successfully");
+                    JOptionPane.showMessageDialog(null, "Rs " + money + " Withdrawn Successfully");
                     setVisible(false);
-                    new Transactions(pinnumber).setVisible(true);
+                    new Transactions(cardNumber, pinnumber).setVisible(true);
                 } catch(Exception e){
                     System.out.println(e);
                 }
             }
         } else if(ae.getSource()==back){
             setVisible(false);
-            new Transactions(pinnumber).setVisible(true);
+            new Transactions(cardNumber, pinnumber).setVisible(true);
         }
     }
     public static void main(String[] args) {
-        new Withdrawl("");
+        new Withdrawl("", "");
     }
 }

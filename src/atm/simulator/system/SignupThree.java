@@ -223,7 +223,7 @@ public class SignupThree extends JFrame implements ActionListener {
                    JOptionPane.showMessageDialog(null,"Card Number: " + cardnumber +"\n Pin: "+pinnumber);
 
                    setVisible(false);
-                   new Deposit(pinnumber).setVisible(true);
+                   new Deposit(cardnumber, pinnumber).setVisible(true); // we need to pass cardnumber also for the unique identification of the account holder
                }
             }catch(Exception e){
                 System.out.println(e);
