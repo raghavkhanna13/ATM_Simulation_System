@@ -3,6 +3,7 @@ package atm.simulator.system;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.ResultSet;
 import java.util.*;
 
 public class Withdrawl extends JFrame implements ActionListener {
@@ -53,12 +54,27 @@ public class Withdrawl extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent ae){
         if(ae.getSource()==withdraw){
             String money=amount.getText();
-            Date date=new Date();
             if(money.equals("")){
                 JOptionPane.showMessageDialog(null,"Please enter the amount you want to Withdraw");
             } else{
                 try {
                     Conn conn = new Conn();
+
+                    ResultSet rs=conn.s.executeQuery("select * from amountDetails where pin ='"+pinnumber+"' AND card_number = '"+ cardNumber +"' ");
+                    int balance =0;
+                    while(rs.next()){
+                        if(rs.getString("type").equals("Deposit")){
+                            balance+=Integer.parseInt(rs.getString("amount"));
+                        } else{
+                            balance -=Integer.parseInt(rs.getString("amount"));
+                        }
+                    }
+                    if(ae.getSource()!=back && balance < Integer.parseInt(money) ){
+                        JOptionPane.showMessageDialog(null,"Insufficient Balance");
+                        return;
+                    }
+
+                    Date date=new Date();
                     String query = "INSERT INTO amountDetails VALUES('"+ cardNumber +"','" + pinnumber + "','" + date + "','Withdrawal','" + money + "')";
                     conn.s.executeUpdate(query);
                     JOptionPane.showMessageDialog(null, "Rs " + money + " Withdrawn Successfully");
