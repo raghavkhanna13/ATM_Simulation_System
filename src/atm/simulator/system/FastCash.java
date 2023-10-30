@@ -80,7 +80,7 @@ public class FastCash extends JFrame implements ActionListener {
             String money=((JButton)e.getSource()).getText().substring(3); //substring is used to start from numbers and leave the text that is Rs and 1 space.
             Conn c=new Conn();
             try{
-                ResultSet rs=c.s.executeQuery("select * from amountDetails where pin ='"+pinNumber+"' && card_number = '"+ cardNumber +"' ");
+                ResultSet rs=c.s.executeQuery("select * from amountDetails where pin ='"+pinNumber+"' AND card_number = '"+ cardNumber +"' ");
                 int balance =0;
                 while(rs.next()){
                     if(rs.getString("type").equals("Deposit")){
@@ -89,12 +89,12 @@ public class FastCash extends JFrame implements ActionListener {
                         balance -=Integer.parseInt(rs.getString("amount"));
                     }
                 }
-                if(e.getSource()!=back && balance<Integer.parseInt(money) ){
+                if(e.getSource()!=back && balance < Integer.parseInt(money) ){
                     JOptionPane.showMessageDialog(null,"Insufficient Balance");
                     return;
                 }
                 Date date=new Date();
-                String query="insert into amountDetails values('"+cardNumber+"''"+pinNumber+"','"+date+"','Withdrawal','"+money+"')";
+                String query="insert into amountDetails values('"+cardNumber+"','"+pinNumber+"','"+date+"','Withdrawal','"+money+"')";
                 c.s.executeUpdate(query);
                 JOptionPane.showMessageDialog(null,"Rs "+money+" Debited Successfuly");
 
