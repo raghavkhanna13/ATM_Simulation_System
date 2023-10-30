@@ -31,4 +31,4 @@ select * from amountDetails;
 
 
 
-
+-- SET SQL_SAFE_UPDATES = 1; 
